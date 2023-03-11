@@ -6,10 +6,11 @@ const TodoModel = require('../models/todo');
 
 // Create a new data entry
 router.post('/',async (req, res) => {
+  console.log("post request",req.body);
   console.log("req body",req.body);
   const myData = new TodoModel({
     description: req.body.description,
-    status: req.body.status
+    status: req.body.status | "incomplete"
   });
   try{
     console.log("mydata",myData);
@@ -26,6 +27,7 @@ router.post('/',async (req, res) => {
 
 // Get all data entries
 router.get('/', (req, res) => {
+  console.log("get request");
   TodoModel.find()
     .then(data => {
       res.json(data);
@@ -43,9 +45,9 @@ router.post('/edit' ,async (req,res)=>{
   
 })
 //delete
-router.delete('/delete' ,async (req,res)=>{
-  console.log("delete with id",req.body.id);
-  await TodoModel.findByIdAndDelete(req.body.id);
+router.delete('/delete/:id' ,async (req,res)=>{
+  console.log("delete with id",req.params.id);
+  await TodoModel.findByIdAndDelete(req.params.id);
     console.log("data deleted");
     return res.json({message : "todo deleted"});
 })

@@ -8,7 +8,11 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+app.use(cors(
+  {
+    origin : '*'
+  }
+));
 //password - o2DJPbABHlKVyQ1B
 // const uri = `mongodb+srv://cluster0-todomean.guh5yzr.mongodb.net/todosdb" --apiVersion 1 --username yogendra55`
 const uri = `mongodb+srv://yogendra55:o2DJPbABHlKVyQ1B@cluster0-todomean.guh5yzr.mongodb.net/todosDB?retryWrites=true&w=majority`
